@@ -1,4 +1,4 @@
-import { Component } from "react";
+  import { Component } from "react";
 import "./App.css";
 import PersonList from "./components/PersonList/PersonList";
 import PersonForm from "./components/personForm/PersonForm";
@@ -15,7 +15,7 @@ export class App extends Component {
         phone: "777777777",
       },
     ],
-    // activeContact: null,
+    activeContact: null,
   };
   creareAmptyContact() {
     return { firstName: "", lastName: "", phone: "", email: "", id: null };
@@ -38,8 +38,10 @@ export class App extends Component {
   onSubmit = (contact) => {
     if (contact.id) {
       this.updatePerson(contact);
+      this.setState({ activeContact: contact });
     } else {
       this.addPerson(contact);
+      this.setState({ activeContact: this.creareAmptyContact() });
     }
   };
 
@@ -48,11 +50,11 @@ export class App extends Component {
       contact: this.state.contact.filter((contact) => contact.id !== id),
     });
   };
-  // onToggle = (contact) => {
-  //   this.setState({
-  //     activeContact: contact,
-  //   });
-  // };
+  isActive = (contact) => {
+    this.setState({
+      activeContact: contact,
+    });
+  };
 
   render() {
     return (
@@ -62,13 +64,12 @@ export class App extends Component {
           <PersonList
             contact={this.state.contact}
             deletePerson={this.deletePerson}
-            // onToggle={this.onToggle}
+            isActive={this.isActive}
           />
           <PersonForm
-            contact={this.state.contact}
             onSubmit={this.onSubmit}
             creareAmptyContact={this.creareAmptyContact}
-            // activeContact={this.state.activeContact}
+            activeContact={this.state.activeContact}
           />
         </div>
       </div>

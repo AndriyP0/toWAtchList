@@ -9,17 +9,15 @@ export class PersonForm extends Component {
     email: "",
     id: null,
   };
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.contact !== this.props.contact) {
-  //     this.setState({ ...this.props.contact });
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    if (prevProps.activeContact !== this.props.activeContact) {
+      this.setState({ ...this.props.activeContact });
+    }
+  }
 
   onFormSubmit = (e) => {
     e.preventDefault();
     this.props.onSubmit(this.state);
-
-    this.setState(this.props.creareAmptyContact());
   };
 
   onInputChange = (event) => {

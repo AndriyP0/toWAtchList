@@ -13,7 +13,7 @@ export class PersonItem extends Component {
     return (
       <div
         className="person-item "
-        // onDoubleClick={() => this.props.onToggle(this.props.contact)}
+        onDoubleClick={() => this.props.isActive(this.props.contact)}
       >
         <p className="content">{firstName + " " + lastName}</p>
         <span className="delete-btn" onClick={this.onPersonDelete}>
