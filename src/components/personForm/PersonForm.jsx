@@ -37,6 +37,16 @@ export class PersonForm extends Component {
               value={this.state.firstName}
               onChange={this.onInputChange}
             />
+            <span
+              className="delete-btn"
+              onClick={() =>
+                this.onInputChange({
+                  target: { name: "firstName", value: "" },
+                })
+              }
+            >
+              X
+            </span>
           </div>
 
           <div className="inp">
@@ -47,6 +57,16 @@ export class PersonForm extends Component {
               value={this.state.lastName}
               onChange={this.onInputChange}
             />
+            <span
+              className="delete-btn"
+              onClick={() =>
+                this.onInputChange({
+                  target: { name: "lastName", value: "" },
+                })
+              }
+            >
+              X
+            </span>
           </div>
 
           <div className="inp">
@@ -57,6 +77,16 @@ export class PersonForm extends Component {
               value={this.state.email}
               onChange={this.onInputChange}
             />
+            <span
+              className="delete-btn"
+              onClick={() =>
+                this.onInputChange({
+                  target: { name: "email", value: "" },
+                })
+              }
+            >
+              X
+            </span>
           </div>
 
           <div className="inp">
@@ -67,6 +97,16 @@ export class PersonForm extends Component {
               value={this.state.phone}
               onChange={this.onInputChange}
             />
+            <span
+              className="delete-btn"
+              onClick={() =>
+                this.onInputChange({
+                  target: { name: "phone", value: "" },
+                })
+              }
+            >
+              X
+            </span>
           </div>
         </div>
 

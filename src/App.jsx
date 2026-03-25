@@ -63,6 +63,10 @@ export class App extends Component {
     }
     this.setState({ activeContact: this.creareAmptyContact() });
   };
+  onNew=()=>{
+        this.setState({ activeContact: this.creareAmptyContact() });
+
+  }
 
   render() {
     return (
@@ -73,6 +77,7 @@ export class App extends Component {
             contact={this.state.contact}
             deletePerson={this.deletePerson}
             isActive={this.isActive}
+            onNew={this.onNew}
           />
           <PersonForm
             onSubmit={this.onSubmit}

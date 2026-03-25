@@ -17,7 +17,9 @@ export class PersonList extends Component {
             />
           ))}
         </div>
-        <button className="list-btn">New</button>
+        <button className="list-btn" onClick={this.props.onNew}>
+          New
+        </button>
       </div>
     );
   }
