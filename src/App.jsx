@@ -1,4 +1,4 @@
-  import { Component } from "react";
+import { Component } from "react";
 import "./App.css";
 import PersonList from "./components/PersonList/PersonList";
 import PersonForm from "./components/personForm/PersonForm";
@@ -41,19 +41,27 @@ export class App extends Component {
       this.setState({ activeContact: contact });
     } else {
       this.addPerson(contact);
-      this.setState({ activeContact: this.creareAmptyContact() });
+      this.resetForm();
     }
   };
 
   deletePerson = (id) => {
     this.setState({
       contact: this.state.contact.filter((contact) => contact.id !== id),
+      activeContact: this.creareAmptyContact(),
     });
   };
   isActive = (contact) => {
     this.setState({
       activeContact: contact,
     });
+  };
+
+  resetForm = () => {
+    if (this.state.activeContact && this.state.activeContact.id) {
+      this.deletePerson(this.state.activeContact.id);
+    }
+    this.setState({ activeContact: this.creareAmptyContact() });
   };
 
   render() {
@@ -70,6 +78,7 @@ export class App extends Component {
             onSubmit={this.onSubmit}
             creareAmptyContact={this.creareAmptyContact}
             activeContact={this.state.activeContact}
+            resetForm={this.resetForm}
           />
         </div>
       </div>

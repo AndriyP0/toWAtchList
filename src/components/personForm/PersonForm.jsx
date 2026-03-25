@@ -72,11 +72,11 @@ export class PersonForm extends Component {
 
         <div className="form-btn">
           <button type="submit">Save</button>
-          {this.props.activeContact ? (
+          {this.props.activeContact && this.props.activeContact.id ? (
             <button
               type="button"
               onClick={() => {
-                this.setState(this.props.creareAmptyContact());
+                this.props.resetForm();
               }}
             >
               Delete
