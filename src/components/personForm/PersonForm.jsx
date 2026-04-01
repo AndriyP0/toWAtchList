@@ -9,10 +9,14 @@ export class PersonForm extends Component {
     email: "",
     id: null,
   };
-  componentDidUpdate(prevProps) {
-    if (prevProps.activeContact !== this.props.activeContact) {
-      this.setState({ ...this.props.activeContact });
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (
+      nextProps.activeContact &&
+      nextProps.activeContact.id !== prevState.id
+    ) {
+      return { ...nextProps.activeContact };
     }
+    return null; 
   }
 
   onFormSubmit = (e) => {

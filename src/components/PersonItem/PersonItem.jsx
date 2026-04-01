@@ -20,7 +20,7 @@ export class PersonItem extends Component {
           X
         </span>
       </div>
-    );
+    ); 
   }
 }
 

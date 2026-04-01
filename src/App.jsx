@@ -6,33 +6,40 @@ import { nanoid } from "nanoid";
 
 export class App extends Component {
   state = {
-    contact: [
-      {
-        id: 1,
-        firstName: "And",
-        lastName: "Pop",
-        email: "And@gmail.com",
-        phone: "777777777",
-      },
-    ],
+    contact: [],
     activeContact: null,
   };
+  componentDidMount() {
+    const saveContact = localStorage.getItem("contacts");
+    if (saveContact) {
+      this.setState({ contact: JSON.parse(saveContact) });
+    } else {
+      this.setState({ contact: [] });
+    }
+  }
+
   creareAmptyContact() {
     return { firstName: "", lastName: "", phone: "", email: "", id: null };
   }
   addPerson = (contact) => {
     contact.id = nanoid();
-    this.setState({
-      contact: [...this.state.contact, contact],
-    });
+    this.setState(
+      {
+        contact: [...this.state.contact, contact],
+      },
+      () => this.save(),
+    );
   };
 
   updatePerson = (updatedContact) => {
-    this.setState({
-      contact: this.state.contact.map((contact) =>
-        contact.id === updatedContact.id ? updatedContact : contact,
-      ),
-    });
+    this.setState(
+      {
+        contact: this.state.contact.map((contact) =>
+          contact.id === updatedContact.id ? updatedContact : contact,
+        ),
+      },
+      () => this.save(),
+    );
   };
 
   onSubmit = (contact) => {
@@ -46,10 +53,13 @@ export class App extends Component {
   };
 
   deletePerson = (id) => {
-    this.setState({
-      contact: this.state.contact.filter((contact) => contact.id !== id),
-      activeContact: this.creareAmptyContact(),
-    });
+    this.setState(
+      {
+        contact: this.state.contact.filter((contact) => contact.id !== id),
+        activeContact: this.creareAmptyContact(),
+      },
+      () => this.save(),
+    );
   };
   isActive = (contact) => {
     this.setState({
@@ -57,16 +67,18 @@ export class App extends Component {
     });
   };
 
+  onNew = () => {
+    this.setState({ activeContact: this.creareAmptyContact() });
+  };
   resetForm = () => {
     if (this.state.activeContact && this.state.activeContact.id) {
       this.deletePerson(this.state.activeContact.id);
     }
-    this.setState({ activeContact: this.creareAmptyContact() });
+    this.onNew();
   };
-  onNew=()=>{
-        this.setState({ activeContact: this.creareAmptyContact() });
-
-  }
+  save = () => {
+    localStorage.setItem("contacts", JSON.stringify(this.state.contact));
+  };
 
   render() {
     return (
